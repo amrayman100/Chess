@@ -12,14 +12,12 @@ package chess;
 public class Pawn implements piece {
      @Override
     public void generate(){
-      for(int i = 0 ; i < 7 ; i++){
-          for(int j = 0 ; j < 7 ; j++){
-            
-              if(canMove(new point(i,j))){
-                  posmoves.add(new point(i,j-1));
-              }
-          }
-      }
+  
+     if(canMove(pos)){
+         pos.y = pos.y-1;
+     }
+     
+     
     }
 
     @Override
