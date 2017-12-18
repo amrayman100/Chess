@@ -13,10 +13,12 @@ public class Pawn implements piece {
      @Override
     public void generate(){
   
-     if(canMove(pos)){
-         pos.y = pos.y-1;
-     }
+
+     point p = new point(pos.x,pos.y-1);
      
+     if(canMove(p)){
+         posmoves.add(p);
+     }
      
     }
 
