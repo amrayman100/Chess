@@ -18,6 +18,7 @@ public class Pawn extends piece {
     }
 
     public Pawn() {
+        rep='p';
     }
    
 
@@ -38,7 +39,7 @@ public class Pawn extends piece {
 
     @Override
     public piece clone() {
-        King p=new King();
+        Pawn p=new Pawn();
         p.pos=this.pos;
         p.comp=this.comp;
         p.game=this.game;

@@ -18,6 +18,7 @@ public class bishop extends piece {
     }
 
     public bishop() {
+                rep='b';
     }
    
     @Override
@@ -26,7 +27,7 @@ public class bishop extends piece {
     }
     @Override
     public piece clone() {
-        King p=new King();
+        bishop p=new bishop();
         p.pos=this.pos;
         p.comp=this.comp;
         p.game=this.game;

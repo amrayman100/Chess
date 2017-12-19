@@ -18,10 +18,11 @@ public class queen extends piece {
     }
 
     public queen() {
+                rep='q';
     }
    @Override
     public piece clone() {
-        King p=new King();
+        queen p=new queen();
         p.pos=this.pos;
         p.comp=this.comp;
         p.game=this.game;

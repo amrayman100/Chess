@@ -10,10 +10,11 @@ public class rook extends piece {
     }
 
     public rook() {
+                rep='r';
     }
    @Override
     public piece clone() {
-        King p=new King();
+        rook p=new rook();
         p.pos=this.pos;
         p.comp=this.comp;
         p.game=this.game;

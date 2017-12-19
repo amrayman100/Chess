@@ -16,6 +16,7 @@ public class King extends piece {
 
     public King() {
         super();
+        rep='k';
     }
     @Override
     public void move(point newPosition) {

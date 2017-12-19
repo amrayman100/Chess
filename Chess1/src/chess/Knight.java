@@ -14,6 +14,8 @@ public class Knight extends piece{
     }
 
     public Knight() {
+                rep='h';
+
     }
    
     @Override

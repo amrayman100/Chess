@@ -126,25 +126,20 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                  System.out.println("h");
                  sel = true;
                  csel = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
-                System.out.println(csel.c);
-                System.out.println(csel.r);
                  tmp=  (ImageIcon)chessBoardSquares[csel.c][csel.r].getIcon();
              }
              else{
                  System.out.println("in");
-               
-                  
                  newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
-                 
+                 p[csel.r][csel.c].generate();
                  if(start.possible(csel, newp)){
                        chessBoardSquares[newp.c][newp.r].setIcon(tmp);
                         chessBoardSquares[csel.c][csel.r].setIcon(null);
                         tmp = null;
                       System.out.println("possible");
                      start.makeMove(csel, newp);
-                    
                      sel = false;
-                     
+                     start.print();
                  }
                  
              }
@@ -438,9 +433,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
             pl.add(p);
         }
         start.comp=cmp;
-        start.player=pl;
-        start.print();
-        
+        start.player=pl;        
           // initializeGui();
           
           

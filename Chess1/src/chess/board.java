@@ -45,7 +45,9 @@ public class board {
     }
     for(int i=0;i<8;i++){
         for(int j=0;j<8;j++){
-            System.out.print(b[i][j]);
+            if(brd[i][j]==null)
+                System.out.print(".");
+            else System.out.print(brd[i][j].rep);
         }
         System.out.println("");
     }
@@ -57,24 +59,26 @@ public class board {
             brd[p.pos.r][p.pos.c]=p;
         return brd;
     }
-    public boolean possible(point oldp,point newp){
+        public boolean possible(point oldp,point newp){
         for(point p:brd[oldp.r][oldp.c].posmoves)
             if(p.r==newp.r&&p.c==newp.c)return true;
         return false;
     }
     public void makeMove(point oldp,point newp){
-        brd[oldp.r][oldp.c].pos=newp;
         brd[newp.r][newp.c]=brd[oldp.r][oldp.c].clone();
+        brd[newp.r][newp.c].pos=newp;
         for(piece p: comp){
             if(oldp.r==p.pos.r&&oldp.c==p.pos.c){
                 comp.remove(p);
                 comp.add(brd[newp.r][newp.c]);
+                break;
             }
         }
         for(piece p: player){
             if(oldp.r==p.pos.r&&oldp.c==p.pos.c){
                 player.remove(p);
                 player.add(brd[newp.r][newp.c]);
+                break;
             }
         }
         brd[oldp.r][oldp.c]=null;
