@@ -136,7 +136,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                   
                  newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
                  
-                 if(true){
+                 if(start.possible(csel, newp)){
                        chessBoardSquares[newp.c][newp.r].setIcon(tmp);
                         chessBoardSquares[csel.c][csel.r].setIcon(null);
                         tmp = null;
