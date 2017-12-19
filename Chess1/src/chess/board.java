@@ -1,11 +1,11 @@
 package chess;
 
 import java.util.*;
-
 public class board {
     ArrayList<piece> player;
     ArrayList<piece> comp;
     char b[][]=new char[8][8];
+    piece[][] brd=new piece[8][8];
     public board(ArrayList<piece> player, ArrayList<piece> comp) {
         this.player = player;
         this.comp = comp;
@@ -49,5 +49,35 @@ public class board {
         }
         System.out.println("");
     }
+    }
+    public piece[][] getBoard(){
+        for(piece p:comp)
+            brd[p.pos.r][p.pos.c]=p;
+        for(piece p:player)
+            brd[p.pos.r][p.pos.c]=p;
+        return brd;
+    }
+    public boolean possible(point oldp,point newp){
+        for(point p:brd[oldp.r][oldp.c].posmoves)
+            if(p.r==newp.r&&p.c==newp.c)return true;
+        return false;
+    }
+    public void makeMove(point oldp,point newp){
+        brd[oldp.r][oldp.c].pos=newp;
+        brd[newp.r][newp.c]=brd[oldp.r][oldp.c].clone();
+        for(piece p: comp){
+            if(oldp.r==p.pos.r&&oldp.c==p.pos.c){
+                comp.remove(p);
+                comp.add(brd[newp.r][newp.c]);
+            }
+        }
+        for(piece p: player){
+            if(oldp.r==p.pos.r&&oldp.c==p.pos.c){
+                player.remove(p);
+                player.add(brd[newp.r][newp.c]);
+            }
+        }
+        brd[oldp.r][oldp.c]=null;
+        brd[newp.r][newp.c].generate();
     }
 }

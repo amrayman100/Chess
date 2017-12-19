@@ -16,10 +16,23 @@ public class bishop extends piece {
         rep='b';
         this.comp=comp;
     }
+
+    public bishop() {
+    }
    
     @Override
     public void move(point newPosition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    @Override
+    public piece clone() {
+        King p=new King();
+        p.pos=this.pos;
+        p.comp=this.comp;
+        p.game=this.game;
+        this.posmoves=p.posmoves;
+        this.rep=p.rep; 
+        return p;
     }
 
     @Override

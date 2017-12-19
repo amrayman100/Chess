@@ -12,11 +12,24 @@ public class Knight extends piece{
         rep='h';
         this.comp=comp;
     }
+
+    public Knight() {
+    }
    
     @Override
     public void move(point newPosition) {
     }
 
+@Override
+    public piece clone() {
+        Knight p=new Knight();
+        p.pos=this.pos;
+        p.comp=this.comp;
+        p.game=this.game;
+        this.posmoves=p.posmoves;
+        this.rep=p.rep; 
+        return p;
+    }
 
     @Override
     public void generate() {

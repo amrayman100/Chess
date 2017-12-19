@@ -13,7 +13,10 @@ public class King extends piece {
         rep='k';
         this.comp=comp;
     }
-   
+
+    public King() {
+        super();
+    }
     @Override
     public void move(point newPosition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -26,6 +29,17 @@ public class King extends piece {
             for(int j=0;j<3;j++){
                 if(canMove(new point(pos.r+arr[i],pos.c+arr[j]))&&(i|j)!=0)posmoves.add(new point(pos.r+i,pos.c+j));
             }
+    }
+
+    @Override
+    public piece clone() {
+        King p=new King();
+        p.pos=this.pos;
+        p.comp=this.comp;
+        p.game=this.game;
+        this.posmoves=p.posmoves;
+        this.rep=p.rep; 
+        return p;
     }
     
 }

@@ -16,6 +16,9 @@ public class Pawn extends piece {
         rep='p';
         this.comp=comp;
     }
+
+    public Pawn() {
+    }
    
 
      @Override
@@ -31,6 +34,17 @@ public class Pawn extends piece {
     @Override
     public void move(point newPosition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public piece clone() {
+        King p=new King();
+        p.pos=this.pos;
+        p.comp=this.comp;
+        p.game=this.game;
+        this.posmoves=p.posmoves;
+        this.rep=p.rep; 
+        return p;
     }
 
 }

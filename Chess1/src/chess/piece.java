@@ -9,6 +9,14 @@ public abstract class piece {
     public piece(board b) {
         game=b;
     }
+    public abstract piece clone();
+    public piece(piece p){
+        this.pos=p.pos;
+        this.comp=p.comp;
+        this.game=p.game;
+        this.posmoves=p.posmoves;
+        this.rep=p.rep;
+    }
     public abstract void move(point newPosition);
     public boolean canMove(point position){
         if(position.r>7||position.r<0||position.c<0||position.c>7) return false;
