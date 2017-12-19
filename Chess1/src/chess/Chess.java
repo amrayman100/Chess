@@ -127,19 +127,34 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                  sel = true;
                  csel = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
                  tmp=  (ImageIcon)chessBoardSquares[csel.c][csel.r].getIcon();
+                 if(tmp==null){
+                    sel = false;
+                    return;
+                 }
              }
              else{
+                 
                  System.out.println("in");
                  newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
+                 if(newp.r==csel.r&&newp.c==csel.c){
+                     System.out.println("NO");
+                     sel = false;
+                     return;
+                 }
                  p[csel.r][csel.c].generate();
                  if(start.possible(csel, newp)){
                        chessBoardSquares[newp.c][newp.r].setIcon(tmp);
                         chessBoardSquares[csel.c][csel.r].setIcon(null);
-                        tmp = null;
+                       
                       System.out.println("possible");
                      start.makeMove(csel, newp);
                      sel = false;
+                      tmp = null;
                      start.print();
+                 }
+                 else{
+                     sel = false;
+                     return;
                  }
                  
              }
