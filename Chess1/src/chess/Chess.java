@@ -82,14 +82,14 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
       Chess() {
         // start.getBoard()
         initializeGui();
-                  k.pos=new point(0,3);
-          q.pos=new point(0,4);
+          k.pos=new point(0,4);
+          q.pos=new point(0,3);
           b.pos=new point(0,2);
           kn.pos=new point(0,1);
           r.pos=new point(0,0);
           r1.pos=new point(0,7);
           b1.pos=new point(0,5);
-           kn1.pos=new point(0,6);
+          kn1.pos=new point(0,6);
             
         cmp.add(k);
         cmp.add(q);
@@ -99,16 +99,16 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         cmp.add(r1);
         cmp.add(b1);
         cmp.add(kn1);
-        kp.pos=new point(7,3);
-        qp.pos=new point(7,4);
-         bp.pos=new point(7,2);
-          knp.pos=new point(7,1);
-          rp.pos=new point(7,0);
-          rp1.pos=new point(7,7);
-            bp1.pos=new point(7,5);
-             knp1.pos=new point(7,6);
+        kp.pos=new point(7,4);
+        qp.pos=new point(7,3);
+        bp.pos=new point(7,2);
+        knp.pos=new point(7,1);
+        rp.pos=new point(7,0);
+        rp1.pos=new point(7,7);
+        bp1.pos=new point(7,5);
+        knp1.pos=new point(7,6);
              
-              pl.add(kp);
+        pl.add(kp);
         pl.add(qp);
         pl.add(bp);
         pl.add(knp);
