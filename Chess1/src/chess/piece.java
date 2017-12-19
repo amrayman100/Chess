@@ -9,6 +9,9 @@ public abstract class piece {
     public piece(board b) {
         game=b;
     }
+
+    public piece() {
+    }
     public abstract piece clone();
     public piece(piece p){
         this.pos=p.pos;
