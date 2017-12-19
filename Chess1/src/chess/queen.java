@@ -9,27 +9,76 @@ package chess;
  *
  * @author ahmedsalah
  */
-public class queen implements piece {
+public class queen extends piece {
 
+    public queen(board b,boolean comp) {
+        super(b);
+        rep='q';
+        this.comp=comp;
+    }
+   
     @Override
     public void move(point newPosition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public boolean canMove(point position) {
-if(position.x<8&&position.x>-1&&position.y>-1&&position.x<8)return true;
-            return false;
-    }
-
     @Override
     public void generate() {
-            for(int i=0;i<8;i++)if(canMove(new point (pos.x,i)))posmoves.add(new point(pos.x,i));
-            for(int i=0;i<8;i++)if(canMove(new point (i,pos.y)))posmoves.add(new point(i,pos.y));
-            int arr[]={-1,1};
-            for(int i=1;i<8;i++)
-            for(int j=0;j<2;j++)
-                for(int k=0;k<2;k++)
-                    if(canMove(new point(pos.x+i*j,pos.y+i*k)))posmoves.add(new point(pos.x+i*j,pos.y+i*k));
+        for(int i=1;i<8;i++){
+                point next=new point (pos.r,pos.c-i);
+                if(canMove(next))posmoves.add(next);
+                            else break;
+            if(comp&&game.pcontain(next))break;
+            if(!comp&&game.ccontain(next))break;
+            }
+            for(int i=1;i<8;i++){
+                point next=new point (pos.r,pos.c+i);
+                if(canMove(next))posmoves.add(next);
+                            else break;
+            if(comp&&game.pcontain(next))break;
+            if(!comp&&game.ccontain(next))break;
+            }
+            for(int i=1;i<8;i++){
+                point next=new point (pos.r-i,pos.c);
+                if(canMove(next))posmoves.add(next);
+                            else break;
+            if(comp&&game.pcontain(next))break;
+            if(!comp&&game.ccontain(next))break;
+            }
+            for(int i=1;i<8;i++){
+                point next=new point (pos.r+i,pos.c);
+                if(canMove(next))posmoves.add(next);
+                            else break;
+            if(comp&&game.pcontain(next))break;
+            if(!comp&&game.ccontain(next))break;
+            }
+            for (int i=1;i<8;i++){
+            point next =new point(pos.r+i,pos.c+i);
+            if(canMove(next))posmoves.add(next);
+                        else break;
+            if(comp&&game.pcontain(next))break;
+            if(!comp&&game.ccontain(next))break;
+        }
+        for (int i=1;i<8;i++){
+            point next =new point(pos.r+i,pos.c-i);
+            if(canMove(next))posmoves.add(next);
+            else break;
+
+            if(comp&&game.pcontain(next))break;
+            if(!comp&&game.ccontain(next))break;
+        }
+        for (int i=1;i<8;i++){
+            point next =new point(pos.r-i,pos.c+i);
+            if(canMove(next))posmoves.add(next);
+                        else break;
+            if(comp&&game.pcontain(next))break;
+            if(!comp&&game.ccontain(next))break;
+        }
+        for (int i=1;i<8;i++){
+            point next =new point(pos.r-i,pos.c-i);
+            if(canMove(next))posmoves.add(next);
+                        else break;
+            if(comp&&game.pcontain(next))break;
+            if(!comp&&game.ccontain(next))break;   
+        }
     }
 }
