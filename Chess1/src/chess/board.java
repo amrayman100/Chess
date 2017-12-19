@@ -27,21 +27,11 @@ public class board {
     public void print(){
     for(piece p:player){
         b[p.pos.r][p.pos.c]=p.rep;
-        p.generate();
-        System.out.println(p.pos.r+" "+p.pos.c);
-        for(point p1:p.posmoves){
-        System.out.println(p1.r+" "+p1.c);
-        }
-        System.out.println("end"); 
+        p.generate(); 
     }
     for(piece p:comp){
         b[p.pos.r][p.pos.c]=p.rep;
         p.generate();
-        System.out.println(p.pos.r+" "+p.pos.c);
-        for(point p1:p.posmoves){
-        System.out.println(p1.r+" "+p1.c);
-        }
-        System.out.println("end");
     }
     for(int i=0;i<8;i++){
         for(int j=0;j<8;j++){
@@ -67,6 +57,16 @@ public class board {
     public void makeMove(point oldp,point newp){
         brd[newp.r][newp.c]=brd[oldp.r][oldp.c].clone();
         brd[newp.r][newp.c].pos=newp;
+        for(int i=0;i<comp.size();i++){
+            piece p=comp.get(i);
+            if(p.pos.r==newp.r&&p.pos.c==newp.c)
+                comp.remove(i);
+        }
+        for(int i=0;i<player.size();i++){
+            piece p=player.get(i);
+            if(p.pos.r==newp.r&&p.pos.c==newp.c)
+                player.remove(i);
+        }
         for(piece p: comp){
             if(oldp.r==p.pos.r&&oldp.c==p.pos.c){
                 comp.remove(p);

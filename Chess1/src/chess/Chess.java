@@ -16,27 +16,6 @@ import javax.imageio.ImageIO;
  * @author ahmedsalah
  */
 
-class MyActionListener implements ActionListener {
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-       JButton btn = (JButton) e.getSource();
-        System.out.println("clicked column " + btn.getClientProperty("column")
-                + ", row " + btn.getClientProperty("row"));
-        
-        
-         //chessBoardSquares[ii][0].setIcon(new ImageIcon(
-                   // chessPieceImages[BLACK][STARTING_ROW[ii]]));
-                   
-             
-  }
-    
-}
-
-
-
-
-
 public class Chess {
 private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JButton[][] chessBoardSquares = new JButton[8][8];
@@ -103,80 +82,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
       Chess() {
         // start.getBoard()
         initializeGui();
-        
-        for(int i = 0 ; i < 8 ; i++){
-            
-            for(int j = 0 ; j < 8 ; j++){
-               chessBoardSquares[i][j].putClientProperty("column", i);
-               chessBoardSquares[i][j].putClientProperty("row", j);
-               chessBoardSquares[i][j].addActionListener(new ActionListener() {
-    
-   public void actionPerformed(ActionEvent e) {
-       JButton btn = (JButton) e.getSource();
-        System.out.println("clicked column " + btn.getClientProperty("column")
-                + ", row " + btn.getClientProperty("row"));
-        
-               // tmp=  (ImageIcon)chessBoardSquares[0][0].getIcon();
-
-         /*chessBoardSquares[5][4].setIcon(tmp);
-         chessBoardSquares[0][0].setIcon(null);*/
-        // Integer.toString(btn.getClientProperty("column"))
-             piece[][] p =  start.getBoard();
-             if(sel==false){
-                 System.out.println("h");
-                 sel = true;
-                 csel = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
-                 tmp=  (ImageIcon)chessBoardSquares[csel.c][csel.r].getIcon();
-                 if(tmp==null){
-                    sel = false;
-                    return;
-                 }
-             }
-             else{
-                 
-                 System.out.println("in");
-                 newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
-                 if(newp.r==csel.r&&newp.c==csel.c){
-                     System.out.println("NO");
-                     sel = false;
-                     return;
-                 }
-                 p[csel.r][csel.c].generate();
-                 if(start.possible(csel, newp)){
-                       chessBoardSquares[newp.c][newp.r].setIcon(tmp);
-                        chessBoardSquares[csel.c][csel.r].setIcon(null);
-                       
-                      System.out.println("possible");
-                     start.makeMove(csel, newp);
-                     sel = false;
-                      tmp = null;
-                     start.print();
-                 }
-                 else{
-                     sel = false;
-                     return;
-                 }
-                 
-             }
-             
-             }
-    
-      });
-            }
-        }
-
-        
-        
-         for(int i=0;i<8;i++){
-            Pawn p=new Pawn(start,true);
-            p.pos=new point(1,i);
-            cmp.add(p);
-        }
-         
-         
-         
-         
-          k.pos=new point(0,3);
+                  k.pos=new point(0,3);
           q.pos=new point(0,4);
           b.pos=new point(0,2);
           kn.pos=new point(0,1);
@@ -217,6 +123,61 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         }
         start.comp=cmp;
         start.player=pl;
+        for(int i = 0 ; i < 8 ; i++){
+            
+            for(int j = 0 ; j < 8 ; j++){
+               chessBoardSquares[i][j].putClientProperty("column", i);
+               chessBoardSquares[i][j].putClientProperty("row", j);
+               chessBoardSquares[i][j].addActionListener(new ActionListener() {
+    
+   public void actionPerformed(ActionEvent e) {
+       JButton btn = (JButton) e.getSource();
+             piece[][] p =  start.getBoard();
+             if(sel==false){
+                 sel = true;
+                 csel = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
+                 tmp=  (ImageIcon)chessBoardSquares[csel.c][csel.r].getIcon();
+                 if(p[csel.r][csel.c]==null){
+                     sel=false;
+                     return;
+                 }
+             }
+             else{
+                 
+                 newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
+                 if(newp.r==csel.r&&newp.c==csel.c){
+                     sel = false;
+                     return;
+                 }
+                 p[csel.r][csel.c].generate();
+                 if(start.possible(csel, newp)){
+                       chessBoardSquares[newp.c][newp.r].setIcon(tmp);
+                        chessBoardSquares[csel.c][csel.r].setIcon(null);
+                        start.makeMove(csel, newp);
+                     sel = false;
+                      tmp = null;
+                     start.print();
+                 }
+                 else{
+                     sel = false;
+                     return;
+                 }
+                 
+             }
+             
+             }
+    
+      });
+            }
+        }
+
+        
+        
+         for(int i=0;i<8;i++){
+            Pawn p=new Pawn(start,true);
+            p.pos=new point(1,i);
+            cmp.add(p);
+        }
     }
       
     
