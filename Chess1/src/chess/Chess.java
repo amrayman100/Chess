@@ -27,6 +27,8 @@ class MyActionListener implements ActionListener {
         
          //chessBoardSquares[ii][0].setIcon(new ImageIcon(
                    // chessPieceImages[BLACK][STARTING_ROW[ii]]));
+                   
+             
   }
     
 }
@@ -40,9 +42,10 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private Image[][] chessPieceImages = new Image[2][6];
     public piece[][] Board = new piece[8][8];
-    
-   
-    
+    public boolean sel = false;
+    public point csel;
+   public point newp;
+    ImageIcon tmp;
     private JPanel chessBoard;
     private final JLabel message = new JLabel(
             "Chess Champ is ready to play!");
@@ -98,6 +101,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     public static final int BLACK = 0, WHITE = 1;
     
       Chess() {
+        // start.getBoard()
         initializeGui();
         
         for(int i = 0 ; i < 8 ; i++){
@@ -112,11 +116,40 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         System.out.println("clicked column " + btn.getClientProperty("column")
                 + ", row " + btn.getClientProperty("row"));
         
-               ImageIcon tmp=  (ImageIcon)chessBoardSquares[0][0].getIcon();
+               // tmp=  (ImageIcon)chessBoardSquares[0][0].getIcon();
 
          /*chessBoardSquares[5][4].setIcon(tmp);
          chessBoardSquares[0][0].setIcon(null);*/
-  }
+        // Integer.toString(btn.getClientProperty("column"))
+             piece[][] p =  start.getBoard();
+             if(sel==false){
+                 System.out.println("h");
+                 sel = true;
+                 csel = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
+                System.out.println(csel.c);
+                System.out.println(csel.r);
+                 tmp=  (ImageIcon)chessBoardSquares[csel.c][csel.r].getIcon();
+             }
+             else{
+                 System.out.println("in");
+               
+                  
+                 newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
+                 
+                 if(true){
+                       chessBoardSquares[newp.c][newp.r].setIcon(tmp);
+                        chessBoardSquares[csel.c][csel.r].setIcon(null);
+                        tmp = null;
+                      System.out.println("possible");
+                     start.makeMove(csel, newp);
+                    
+                     sel = false;
+                     
+                 }
+                 
+             }
+             
+             }
     
       });
             }
