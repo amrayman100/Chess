@@ -161,7 +161,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                  
                   for(point d :p[csel.r][csel.c].posmoves){
                  
-                     chessBoardSquares[d.c][d.r].setBorder(null);
+                     chessBoardSquares[d.c][d.r].setBorder(BorderFactory.createLineBorder(Color.white, 1));
                  }
                  
                  newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
