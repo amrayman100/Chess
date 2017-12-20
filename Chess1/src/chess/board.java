@@ -72,7 +72,7 @@ public class board {
         return false;
     }
     public void makeMove(point oldp,point newp){
-if(newp==null) System.out.println("here");
+        if(!possible(oldp, newp))return;
     brd[newp.r][newp.c]=brd[oldp.r][oldp.c].clone();
         brd[newp.r][newp.c].pos=newp;
         
@@ -101,6 +101,8 @@ if(newp==null) System.out.println("here");
             }
         }
         brd[oldp.r][oldp.c]=null;
+        System.out.println(newp.r+" "+newp.c);
+        this.print();
         brd[newp.r][newp.c].generate();
     }
 }

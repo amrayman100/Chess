@@ -30,7 +30,7 @@ public class bishop extends piece {
     @Override
     public piece clone() {
         bishop p=new bishop();
-         point p1=new point(pos.c,pos.r);
+         point p1=new point(pos.r,pos.c);
         p.pos=p1;
         p.comp=this.comp;
         p.game=this.game.clone();

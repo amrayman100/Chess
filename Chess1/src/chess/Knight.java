@@ -27,7 +27,7 @@ public class Knight extends piece{
 @Override
     public piece clone() {
         Knight p=new Knight();
-        point p1=new point(pos.c,pos.r);
+        point p1=new point(pos.r,pos.c);
         p.pos=p1;
         p.comp=this.comp;
         p.game=this.game.clone();

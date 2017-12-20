@@ -57,12 +57,11 @@ public double value;
             return v;
         }
         move v=new move(null,null,Integer.MIN_VALUE);
-                board clone=brd.clone();
-        for(piece p:clone.player)
-            for(point pnt:p.posmoves){
-                clone=brd.clone();
-                clone.makeMove(p.pos, pnt);
-                v=Min(v,max(clone,alpha,beta,depth-1,new move(p.pos,pnt,0)));
+        for(int i=0;i<brd.player.size();i++)
+            for(int j=0;j<(int)brd.player.get(i).posmoves.size();j++){
+                 board clone=brd.clone();
+                clone.makeMove(clone.player.get(i).pos, clone.player.get(i).posmoves.get(j));
+                v=Min(v,max(clone,alpha,beta,depth-1,new move(clone.player.get(i).pos,clone.player.get(i).posmoves.get(j),0)));
                 if(v.value<=alpha)return v;
                 if(v.value<beta)beta=(int)v.value;
             }
