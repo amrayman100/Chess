@@ -5,6 +5,8 @@
  */
 package chess;
 
+import java.util.ArrayList;
+
 
 public class King extends piece {
 
@@ -35,10 +37,13 @@ public class King extends piece {
     @Override
     public piece clone() {
         King p=new King();
-        p.pos=this.pos;
+        point p1=new point(pos.c,pos.r);
+        p.pos=p1;
         p.comp=this.comp;
-        p.game=this.game;
-        this.posmoves=p.posmoves;
+        p.game=this.game.clone();
+        ArrayList<point> posmoves1=new ArrayList();
+        for(point p2:posmoves)posmoves1.add(p2);
+        p.posmoves=posmoves1;
         this.rep=p.rep; 
         return p;
     }

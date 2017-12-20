@@ -12,6 +12,23 @@ public class board {
     }
     public board() {
     }
+    public board clone(){
+        ArrayList<piece> comp1=new ArrayList();
+        ArrayList<piece> player1=new ArrayList();
+        for(piece p:comp) comp1.add(p);
+        for(piece p:player) player1.add(p);
+        board clone = new board(player1,comp1);
+        piece[][] cln=new piece[8][8];
+        char b1[][]=new char[8][8];
+        for(int i=0;i<8;i++)
+            for(int j=0;j<8;j++){
+                cln[i][j]=brd[i][j];
+                b1[i][j]=b[i][j];
+            }
+        clone.brd=cln;
+        clone.b=b1;
+        return clone;
+    }
     public boolean ccontain(point p){
         for(piece p1:comp)
             if(p1.pos.r==p.r&&p1.pos.c==p.c)
@@ -55,8 +72,10 @@ public class board {
         return false;
     }
     public void makeMove(point oldp,point newp){
-        brd[newp.r][newp.c]=brd[oldp.r][oldp.c].clone();
+if(newp==null) System.out.println("here");
+    brd[newp.r][newp.c]=brd[oldp.r][oldp.c].clone();
         brd[newp.r][newp.c].pos=newp;
+        
         for(int i=0;i<comp.size();i++){
             piece p=comp.get(i);
             if(p.pos.r==newp.r&&p.pos.c==newp.c)

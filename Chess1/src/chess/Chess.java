@@ -154,8 +154,11 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                        chessBoardSquares[newp.c][newp.r].setIcon(tmp);
                         chessBoardSquares[csel.c][csel.r].setIcon(null);
                         start.makeMove(csel, newp);
+                        move mv=new move(0);
                      sel = false;
                       tmp = null;
+                     start.print();
+                     mv.alpha(start,3);
                      start.print();
                  }
                  else{
