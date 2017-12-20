@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.net.URL;
@@ -204,8 +205,9 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
 
     private final void createImages() {
         try {
+           URL url2 = this.getClass().getResource("memI0.png");
             URL url = new URL("http://i.stack.imgur.com/memI0.png");
-            BufferedImage bi = ImageIO.read(url);
+            BufferedImage bi = ImageIO.read(url2);
             for (int ii = 0; ii < 2; ii++) {
                 for (int jj = 0; jj < 6; jj++) {
                     chessPieceImages[ii][jj] = bi.getSubimage(
