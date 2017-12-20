@@ -27,9 +27,30 @@ public class Pawn extends piece {
         point p;
         if(comp) p = new point(pos.r+1,pos.c); 
         else p=new point(pos.r-1,pos.c);
+        
      if(canMove(p)){
          posmoves.add(p);
      }
+     point p1 = new point(pos.r+1,pos.c-1);
+     point p2 = new point(pos.r+1,pos.c+1);
+     if(comp&&game.pcontain(p1)){
+         posmoves.add(p1);
+        
+     }
+     if(comp&&game.pcontain(p2)){
+          posmoves.add(p2);
+     }
+     
+      point p3 = new point(pos.r-1,pos.c-1);
+     point p4 = new point(pos.r-1,pos.c+1);
+     if(!comp&&game.ccontain(p3)){
+         posmoves.add(p3);
+        
+     }
+     if(!comp&&game.ccontain(p4)){
+          posmoves.add(p4);
+     }
+     
     }
 
     @Override
