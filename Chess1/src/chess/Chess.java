@@ -18,8 +18,8 @@ import javax.imageio.ImageIO;
 
 public class Chess {
 private final JPanel gui = new JPanel(new BorderLayout(3, 3));
-    private JButton[][] chessBoardSquares = new JButton[8][8];
-    private Image[][] chessPieceImages = new Image[2][6];
+    public static JButton[][] chessBoardSquares = new JButton[8][8];
+    public static Image[][] chessPieceImages = new Image[2][6];
     public piece[][] Board = new piece[8][8];
     public boolean sel = false;
     public point csel;
@@ -75,12 +75,17 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
        
        
     
-    
+       public static void change(point oldp,point newp){
+        ImageIcon tmp=(ImageIcon)Chess.chessBoardSquares[oldp.c][oldp.r].getIcon();
+        Chess.chessBoardSquares[newp.c][newp.r].setIcon(tmp);
+        Chess.chessBoardSquares[oldp.c][oldp.r].setIcon(null);
+        }
     
     public static final int BLACK = 0, WHITE = 1;
     
       Chess() {
         // start.getBoard()
+
         initializeGui();
           k.pos=new point(0,4);
           q.pos=new point(0,3);
@@ -151,13 +156,13 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                  }
                  p[csel.r][csel.c].generate();
                  if(start.possible(csel, newp)){
-                       chessBoardSquares[newp.c][newp.r].setIcon(tmp);
-                        chessBoardSquares[csel.c][csel.r].setIcon(null);
+//                       chessBoardSquares[newp.c][newp.r].setIcon(tmp);
+//                        chessBoardSquares[csel.c][csel.r].setIcon(null);
+                        change(csel,newp);
                         start.makeMove(csel, newp);
                         move mv=new move(0);
                      sel = false;
                       tmp = null;
-                     start.print();
                      mv.alpha(start,3);
                      start.print();
                  }
