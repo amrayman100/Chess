@@ -161,7 +161,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                  
                   for(point d :p[csel.r][csel.c].posmoves){
                  
-                     chessBoardSquares[d.c][d.r].setBorder(BorderFactory.createLineBorder(Color.white, 1));
+                     chessBoardSquares[d.c][d.r].setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
                      
                  }
                  
@@ -310,7 +310,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                 ));
         // Set the BG to be ochre
         Color ochre = new Color(204,119,34);
-        chessBoard.setBackground(ochre);
+        chessBoard.setBackground(Color.white);
         JPanel boardConstrain = new JPanel(new GridBagLayout());
         boardConstrain.setBackground(ochre);
         boardConstrain.add(chessBoard);
