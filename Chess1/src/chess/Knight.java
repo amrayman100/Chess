@@ -40,6 +40,7 @@ public class Knight extends piece{
 
     @Override
     public void generate() {
+        posmoves.clear();
      int arr1[]={1,-1},arr2[]={-2,2};
         for(int i=0;i<2;i++)
             for(int j=0;j<2;j++)

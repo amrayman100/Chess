@@ -103,6 +103,9 @@ public class board {
         brd[oldp.r][oldp.c]=null;
         System.out.println(newp.r+" "+newp.c);
         this.print();
-        brd[newp.r][newp.c].generate();
+        for(piece p:comp)
+            p.generate();
+        for(piece p:player)
+            p.generate();
     }
 }

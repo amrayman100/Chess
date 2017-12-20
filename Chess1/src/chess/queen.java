@@ -41,6 +41,7 @@ public class queen extends piece {
     }
     @Override
     public void generate() {
+        posmoves.clear();
         for(int i=1;i<8;i++){
                 point next=new point (pos.r,pos.c-i);
                 if(canMove(next))posmoves.add(next);

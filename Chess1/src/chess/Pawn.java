@@ -26,6 +26,7 @@ public class Pawn extends piece {
 
      @Override
     public void generate(){
+        posmoves.clear();
         point p;
         if(comp) p = new point(pos.r+1,pos.c); 
         else p=new point(pos.r-1,pos.c);
