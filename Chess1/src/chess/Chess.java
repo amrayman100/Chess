@@ -80,7 +80,10 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         Chess.chessBoardSquares[newp.c][newp.r].setIcon(tmp);
         Chess.chessBoardSquares[oldp.c][oldp.r].setIcon(null);
         }
-    
+    public boolean user(point p,board b){
+        if(b.pcontain(p))return true;
+        return false;
+    }
     public static final int BLACK = 0, WHITE = 1;
     
       Chess() {
@@ -142,22 +145,15 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                  sel = true;
                  csel = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
                  tmp=  (ImageIcon)chessBoardSquares[csel.c][csel.r].getIcon();
-                 if(p[csel.r][csel.c]==null){
+                 if(p[csel.r][csel.c]==null||!user(csel,start)){
                      sel=false;
                      return;
                  }
              }
              else{
-                 
                  newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
-                 if(newp.r==csel.r&&newp.c==csel.c){
-                     sel = false;
-                     return;
-                 }
                  p[csel.r][csel.c].generate();
                  if(start.possible(csel, newp)){
-//                       chessBoardSquares[newp.c][newp.r].setIcon(tmp);
-//                        chessBoardSquares[csel.c][csel.r].setIcon(null);
                         change(csel,newp);
                         start.makeMove(csel, newp);
                         move mv=new move(0);

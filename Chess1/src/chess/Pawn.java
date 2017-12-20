@@ -22,8 +22,12 @@ public class Pawn extends piece {
     public Pawn() {
         rep='p';
     }
-   
 
+    @Override
+    public boolean canMove(point position) {
+        return super.canMove(position)&&!game.pcontain(position)&&!game.ccontain(position); //To change body of generated methods, choose Tools | Templates.
+    }
+   
      @Override
     public void generate(){
         posmoves.clear();
