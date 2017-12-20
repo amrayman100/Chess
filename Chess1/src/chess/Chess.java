@@ -149,10 +149,22 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                      sel=false;
                      return;
                  }
+                p[csel.r][csel.c].generate();
+                 System.out.println(p[csel.r][csel.c].posmoves.isEmpty());
+                 for(point d :p[csel.r][csel.c].posmoves){
+                    
+                     chessBoardSquares[d.c][d.r].setBorder(BorderFactory.createLineBorder(Color.red, 5));
+                 }
              }
              else{
+                 
+                  for(point d :p[csel.r][csel.c].posmoves){
+                 
+                     chessBoardSquares[d.c][d.r].setBorder(null);
+                 }
+                 
                  newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
-                 p[csel.r][csel.c].generate();
+                 
                  if(start.possible(csel, newp)){
                         change(csel,newp);
                         start.makeMove(csel, newp);
