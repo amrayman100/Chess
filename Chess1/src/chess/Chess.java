@@ -384,6 +384,8 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                 Chess cg = new Chess();
 
                 JFrame f = new JFrame("ChessChamp");
+                f.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+                //f.setUndecorated(true);
                 f.add(cg.getGui());
                 // Ensures JVM closes after frame(s) closed and
                 // all non-daemon threads are finished
