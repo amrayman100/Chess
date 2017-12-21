@@ -331,8 +331,10 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                         //) {
                         || (jj % 2 == 0 && ii % 2 == 0)) {
                     b.setBackground(Color.WHITE);
+                   b.setOpaque(true);
                 } else {
                     b.setBackground(Color.BLACK);
+                    b.setOpaque(true);
                 }
                 chessBoardSquares[jj][ii] = b;
             }
