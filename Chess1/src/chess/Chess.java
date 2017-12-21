@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
  */
 
 public class Chess {
+   
 private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     public static JButton[][] chessBoardSquares = new JButton[8][8];
     public static Image[][] chessPieceImages = new Image[2][6];
@@ -89,7 +90,11 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     
       Chess() {
         // start.getBoard()
-
+ try{
+   UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+ }catch(Exception e){
+  e.printStackTrace(); 
+ }
         initializeGui();
           k.pos=new point(0,4);
           q.pos=new point(0,3);
