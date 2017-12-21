@@ -311,6 +311,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         // Set the BG to be ochre
         Color ochre = new Color(204,119,34);
         chessBoard.setBackground(Color.white);
+        chessBoard.setOpaque(true);
         JPanel boardConstrain = new JPanel(new GridBagLayout());
         boardConstrain.setBackground(ochre);
         boardConstrain.add(chessBoard);
