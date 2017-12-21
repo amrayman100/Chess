@@ -18,15 +18,11 @@ public double value;
     public int utility(board brd){
         int AIvalue=0;
         for(piece p:brd.comp){
-            if(p.getClass()==King.class)
-                if(brd.comp.size()<5) AIvalue+=p.kingweight();
-                else AIvalue+=p.weight();
+            if(p.getClass()==King.class&&brd.player.size()<5)AIvalue+=p.kingweight();
             else AIvalue+=p.weight();
         }
         for(piece p:brd.player){
-            if(p.getClass()==King.class)
-                if(brd.player.size()<5) AIvalue-=p.kingweight();
-                else AIvalue-=p.weight();
+            if(p.getClass()==King.class&&brd.player.size()<5)AIvalue-=p.kingweight();
             else AIvalue-=p.weight();
         }
         return AIvalue;
