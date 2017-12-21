@@ -29,7 +29,26 @@ public class Pawn extends piece {
 
     @Override
     public boolean canMove(point position) {
-        return super.canMove(position)&&!game.pcontain(position)&&!game.ccontain(position); //To change body of generated methods, choose Tools | Templates.
+        boolean notjump = true;
+        boolean wrongkill = true;
+        if(pos.r==6&&!comp&&game.pcontain(new point(pos.r-1,pos.c))&&position.r==pos.r-2&&position.c==pos.c){
+            notjump = false;
+        }
+        else if(pos.r==6&&!comp&&game.ccontain(new point(pos.r-1,pos.c))&&position.r==pos.r-2&&position.c==pos.c){
+            notjump = false;
+        }
+          if(pos.r==1&&comp&&game.ccontain(new point(pos.r+1,pos.c))&&position.r==pos.r+2&&position.c==pos.c){
+            notjump = false;
+        }
+        else if(pos.r==1&&!comp&&game.pcontain(new point(pos.r+1,pos.c))&&position.r==pos.r+2&&position.c==pos.c){
+            notjump = false;
+        }
+    
+    
+
+        
+        
+        return super.canMove(position)&&!game.pcontain(position)&&!game.ccontain(position)&&notjump; //To change body of generated methods, choose Tools | Templates.
     }
    
      @Override
@@ -61,6 +80,19 @@ public class Pawn extends piece {
      if(!comp&&game.ccontain(p4)){
           posmoves.add(p4);
      }
+     
+      if(pos.r==1&&comp){
+          p = new point(pos.r+2,pos.c);
+          if(canMove(p)){
+         posmoves.add(p);
+            }
+      }
+      else if(pos.r==6&&!comp){
+            p = new point(pos.r-2,pos.c);
+            if(canMove(p)){
+         posmoves.add(p);
+         }
+      }
      
     }
 
