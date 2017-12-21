@@ -16,7 +16,20 @@ public double value;
     }
 
     public int utility(board brd){
-        return 1;
+        int AIvalue=0;
+        for(piece p:brd.comp){
+            if(p.getClass()==King.class)
+                if(brd.comp.size()<5) AIvalue+=p.kingweight();
+                else AIvalue+=p.weight();
+            else AIvalue+=p.weight();
+        }
+        for(piece p:brd.player){
+            if(p.getClass()==King.class)
+                if(brd.player.size()<5) AIvalue-=p.kingweight();
+                else AIvalue-=p.weight();
+            else AIvalue-=p.weight();
+        }
+        return AIvalue;
     }
     public void alpha(board b,int depth){
         move v=max(b,Integer.MIN_VALUE,Integer.MAX_VALUE,depth,null);
@@ -26,6 +39,7 @@ public double value;
     move max(board brd,int alpha,int beta,int depth,move old){
         if(depth==0){
             move v=new move(utility(brd));
+            System.out.println(v.value);
             v.oldp=old.oldp;
             v.newp=old.oldp;
             return v;
@@ -49,6 +63,7 @@ public double value;
     move min(board brd,int alpha,int beta,int depth,move old){
         if(depth==0){
             move v=new move(utility(brd));
+                        System.out.println(v.value);
             v.oldp=old.oldp;
             v.newp=old.newp;
             return v;

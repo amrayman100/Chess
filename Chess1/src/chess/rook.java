@@ -5,14 +5,33 @@ import java.util.ArrayList;
 
 public class rook extends piece {
 
+    @SuppressWarnings("empty-statement")
     public rook(board b,boolean comp) {
         super(b);
         rep='r';
         this.comp=comp;
+        value=500;
+        evaluate =new int[][]{{ 0,  0,  0,  0,  0,  0,  0,  0},
+            {5, 10, 10, 10, 10, 10, 10,  5},
+            {-5,  0,  0,  0,  0,  0,  0, -5},
+            {-5,  0,  0,  0,  0,  0,  0, -5},
+    {-5,  0,  0,  0,  0,  0,  0, -5},
+ {-5,  0,  0,  0,  0,  0,  0, -5},
+ {-5,  0,  0,  0,  0,  0,  0, -5},
+            { 0,  0,  0,  5,  5,  0,  0,  0}};
     }
 
     public rook() {
                 rep='r';
+                value=500;
+                        evaluate =new int[][]{{ 0,  0,  0,  0,  0,  0,  0,  0},
+            {5, 10, 10, 10, 10, 10, 10,  5},
+            {-5,  0,  0,  0,  0,  0,  0, -5},
+            {-5,  0,  0,  0,  0,  0,  0, -5},
+    {-5,  0,  0,  0,  0,  0,  0, -5},
+ {-5,  0,  0,  0,  0,  0,  0, -5},
+ {-5,  0,  0,  0,  0,  0,  0, -5},
+            { 0,  0,  0,  5,  5,  0,  0,  0}};
     }
    @Override
     public piece clone() {
@@ -27,10 +46,7 @@ public class rook extends piece {
         this.rep=p.rep; 
         return p;
     }
-    @Override
-    public void move(point newPosition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     @Override
     public void generate() {
         posmoves.clear();

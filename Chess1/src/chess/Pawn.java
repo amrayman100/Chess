@@ -17,10 +17,14 @@ public class Pawn extends piece {
         super(b);
         rep='p';
         this.comp=comp;
+        value=100;
+        evaluate=new int[][]{{0,  0,  0,  0,  0,  0,  0,  0},{50, 50, 50, 50, 50, 50, 50, 50},{10, 10, 20, 30, 30, 20, 10, 10},{5,  5, 10, 25, 25, 10,  5,  5},{0,  0,  0, 20, 20,  0,  0,  0},{5, -5,-10,  0,  0,-10, -5,  5},{5, 10, 10,-20,-20, 10, 10,  5},{0,  0,  0,  0,  0,  0,  0,  0}};
     }
 
     public Pawn() {
         rep='p';
+        value=100;
+        evaluate=new int[][]{{0,  0,  0,  0,  0,  0,  0,  0},{50, 50, 50, 50, 50, 50, 50, 50},{10, 10, 20, 30, 30, 20, 10, 10},{5,  5, 10, 25, 25, 10,  5,  5},{0,  0,  0, 20, 20,  0,  0,  0},{5, -5,-10,  0,  0,-10, -5,  5},{5, 10, 10,-20,-20, 10, 10,  5},{0,  0,  0,  0,  0,  0,  0,  0}};
     }
 
     @Override
@@ -58,11 +62,6 @@ public class Pawn extends piece {
           posmoves.add(p4);
      }
      
-    }
-
-    @Override
-    public void move(point newPosition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

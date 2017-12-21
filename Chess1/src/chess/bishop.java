@@ -17,16 +17,30 @@ public class bishop extends piece {
         super(b);
         rep='b';
         this.comp=comp;
+        value=330;
+        evaluate=new int[][]{{-20,-10,-10,-10,-10,-10,-10,-20},
+            {-10,  0,  0,  0,  0,  0,  0,-10},
+        {-10,  0,  5, 10, 10,  5,  0,-10},
+        {-10,  5,  5, 10, 10,  5,  5,-10},
+{-10,  0, 10, 10, 10, 10,  0,-10},
+{-10, 10, 10, 10, 10, 10, 10,-10},
+{-10,  5,  0,  0,  0,  0,  5,-10},
+{-20,-10,-10,-10,-10,-10,-10,-20}};
     }
 
     public bishop() {
                 rep='b';
+                value=330;
+                evaluate=new int[][]{{-20,-10,-10,-10,-10,-10,-10,-20},
+                                    {-10,  0,  0,  0,  0,  0,  0,-10},
+                                    {-10,  0,  5, 10, 10,  5,  0,-10},
+                                    {-10,  5,  5, 10, 10,  5,  5,-10},
+                                    {-10,  0, 10, 10, 10, 10,  0,-10},
+                                    {-10, 10, 10, 10, 10, 10, 10,-10},
+                                    {-10,  5,  0,  0,  0,  0,  5,-10},
+                                    {-20,-10,-10,-10,-10,-10,-10,-20}};
     }
-   
-    @Override
-    public void move(point newPosition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     @Override
     public piece clone() {
         bishop p=new bishop();

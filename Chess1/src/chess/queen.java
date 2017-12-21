@@ -17,10 +17,28 @@ public class queen extends piece {
         super(b);
         rep='q';
         this.comp=comp;
+        value=900;
+        evaluate =new int[][]{{-20,-10,-10, -5, -5,-10,-10,-20},
+                                {-10,  0,  0,  0,  0,  0,  0,-10},
+                                {-10,  0,  5,  5,  5,  5,  0,-10},
+                                { -5,  0,  5,  5,  5,  5,  0, -5},
+                                { 0,  0,  5,  5,  5,  5,  0, -5},
+                                {-10,  5,  5,  5,  5,  5,  0,-10},
+                                {-10,  0,  5,  0,  0,  0,  0,-10},
+                                {-20,-10,-10, -5, -5,-10,-10,-20}};
     }
 
     public queen() {
                 rep='q';
+                value=900;
+                        evaluate =new int[][]{{-20,-10,-10, -5, -5,-10,-10,-20},
+                                {-10,  0,  0,  0,  0,  0,  0,-10},
+                                {-10,  0,  5,  5,  5,  5,  0,-10},
+                                { -5,  0,  5,  5,  5,  5,  0, -5},
+                                { 0,  0,  5,  5,  5,  5,  0, -5},
+                                {-10,  5,  5,  5,  5,  5,  0,-10},
+                                {-10,  0,  5,  0,  0,  0,  0,-10},
+                                {-20,-10,-10, -5, -5,-10,-10,-20}};
     }
    @Override
     public piece clone() {
@@ -34,10 +52,6 @@ public class queen extends piece {
         p.posmoves=posmoves1;
         this.rep=p.rep; 
         return p;
-    }
-    @Override
-    public void move(point newPosition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     @Override
     public void generate() {

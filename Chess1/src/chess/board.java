@@ -73,7 +73,6 @@ public class board {
         return false;
     }
     public void makeMove(point oldp,point newp){
-        if(newp.c==oldp.c&&oldp.r==newp.r)System.out.println("chess.board.makeMove()");
     brd[newp.r][newp.c]=brd[oldp.r][oldp.c].clone();
         brd[newp.r][newp.c].pos=newp;
         
@@ -102,8 +101,8 @@ public class board {
             }
         }
         brd[oldp.r][oldp.c]=null;
-        System.out.println(newp.r+" "+newp.c);
-        this.print();
+        //System.out.println(newp.r+" "+newp.c);
+        //this.print();
         for(piece p:comp){
             p.game=this;
             p.generate();

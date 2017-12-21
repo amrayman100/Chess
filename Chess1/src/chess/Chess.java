@@ -156,7 +156,6 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                      return;
                  }
                 p[csel.r][csel.c].generate();
-                 System.out.println(p[csel.r][csel.c].posmoves.isEmpty());
                  for(point d :p[csel.r][csel.c].posmoves){
                     
                      chessBoardSquares[d.c][d.r].setBorder(BorderFactory.createLineBorder(Color.red, 5));
@@ -178,8 +177,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                         move mv=new move(0);
                      sel = false;
                       tmp = null;
-                     mv.alpha(start,3);
-                     start.print();
+                     mv.alpha(start,4);
                  }
                  else{
                      sel = false;
