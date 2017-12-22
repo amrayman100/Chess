@@ -26,6 +26,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     public boolean sel = false;
     public point csel;
    public point newp;
+   public int diff = 1;
     ImageIcon tmp;
     private JPanel chessBoard;
     private final JLabel message = new JLabel(
@@ -173,11 +174,12 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                  
                  if(start.possible(csel, newp)){
                         change(csel,newp);
-                        start.makeMove(csel, newp);
+                        
                         move mv=new move(0);
                      sel = false;
                       tmp = null;
-                     mv.alpha(start,4);
+                     mv.alpha(start,diff);
+                     start.makeMove(csel, newp);
                  }
                  else{
                      sel = false;
@@ -248,7 +250,14 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                     chessPieceImages[WHITE][STARTING_ROW[ii]]));
         }
     }
-
+    
+    public void emptyBoard(){
+        for(int i = 1; i < 7 ;i++){
+            for(int j = 0 ; j < 8 ;j++){
+                 chessBoardSquares[i][j].setIcon(null);
+        }
+    }
+    }
       
     
      public final void initializeGui() {
@@ -260,14 +269,40 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         JToolBar tools = new JToolBar();
         tools.setFloatable(false);
         gui.add(tools, BorderLayout.PAGE_START);
-        Action newGameAction = new AbstractAction("New") {
+        Action newGameEasy = new AbstractAction("Start Easy!") {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                 emptyBoard();
+                diff =2;
                 setupNewGame();
             }
         };
-        tools.add(newGameAction);
+        
+        
+         Action newGameMedium = new AbstractAction("Start Medium!") {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 emptyBoard();
+                diff =3;
+                setupNewGame();
+            }
+        };
+         
+           Action newGameHard = new AbstractAction("Start Hard!") {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 emptyBoard();
+                diff =4;
+                setupNewGame();
+            }
+        };
+        tools.add(newGameEasy);
+        tools.add(newGameMedium);
+        tools.add(newGameHard);
+        
         tools.add(new JButton("Save")); // TODO - add functionality!
         tools.add(new JButton("Restore")); // TODO - add functionality!
         tools.addSeparator();
