@@ -454,7 +454,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
             public void run() {
                 Chess cg = new Chess();
 
-                JFrame f = new JFrame("ChessChamp");
+                JFrame f = new JFrame();
                 f.setExtendedState(JFrame.MAXIMIZED_BOTH); 
            
                 f.add(cg.getGui());
