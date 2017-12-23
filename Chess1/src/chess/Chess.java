@@ -197,6 +197,12 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                      if(!tmp.check(tmp.getKing(false))){
                      change(csel,newp);
                      start.makeMove(csel, newp);
+                     boolean c=false;
+                     for(piece cl1:start.comp)if(cl1.getClass()==King.class) c=true;
+                     if(!c)  {
+                         JOptionPane.showMessageDialog(null, "You Win :)");
+                         gameOn=false;
+                     }
                      start.print();
                      King tmpking=tmp.getKing(false);
                      p1=live(tmp,tmpking,false);
@@ -213,20 +219,18 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                              JOptionPane.showMessageDialog(null, "Game is Tie");
                              gameOn=false;
                          }
-                         else if(tmp.check(tmpking)) {
-                             JOptionPane.showMessageDialog(null, "You win");
-                             gameOn=false;
-                         }
                      }
                      else if(!p1){
                          if(!tmp.check(tmp.getKing(false))&&tmp.player.size()==1&&tmp.player.get(0).getClass()==King.class){
                              JOptionPane.showMessageDialog(null, "Game is Tie");
                              gameOn=false;
                          }
-                         else if(tmp.check(tmp.getKing(false))) {
-                             JOptionPane.showMessageDialog(null, "Bot wins");
-                             gameOn=false;
-                         }
+                     }
+                     boolean pl=false;
+                     for(piece pl1:start.player)if(pl1.getClass()==King.class) pl=true;
+                     if(!pl) {
+                         JOptionPane.showMessageDialog(null, "Bos wins :(");
+                         gameOn=false;
                      }
                       }
                      else JOptionPane.showMessageDialog(null, "The King Will Die");
