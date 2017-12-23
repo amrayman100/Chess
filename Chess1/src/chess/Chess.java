@@ -130,6 +130,16 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         ret.player=pl;
         return ret;
     }
+    public boolean live(board tmp,King king,boolean cmp){
+        for(point pnt:king.posmoves){
+                        board tmp1=tmp.clone();
+                        tmp1.makeMove(king.pos, pnt);
+                        if(!tmp1.check(tmp1.getKing(cmp)))
+                            return true;
+                        
+                     }
+        return false;
+    }
     public static final int BLACK = 0, WHITE = 1;
     
       Chess() {
@@ -190,38 +200,15 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                      start.makeMove(csel, newp);
                      start.print();
                      King tmpking=tmp.getKing(false);
-                     for(point pnt:tmpking.posmoves){
-                        board tmp1=tmp.clone();
-                        tmp1.makeMove(tmpking.pos, pnt);
-                        if(!tmp1.check(tmp1.getKing(false)))
-                            p1=true;
-                     }
+                     p1=live(tmp,tmpking,false);
                      tmpking=tmp.getKing(true);
-                     for(point pnt:tmpking.posmoves){
-                        board tmp1=tmp.clone();
-                        tmp1.makeMove(tmpking.pos, pnt);
-                        if(!tmp1.check(tmp1.getKing(false)))
-                            c1=true;
-                     }                     
+                     c1=live(tmp,tmpking,true);                    
                      mv.alpha(start,diff);
                      if(start.check(start.getKing(false))) JOptionPane.showMessageDialog(null, "Check!");
-                      }
-                     else JOptionPane.showMessageDialog(null, "The King Will Die");
-                     King tmpking=tmp.getKing(false);
-                     for(point pnt:tmpking.posmoves){
-                        board tmp1=tmp.clone();
-                        tmp1.makeMove(tmpking.pos, pnt);
-                        if(!tmp1.check(tmp1.getKing(false)))
-                            p1=true;
-                        
-                     }
+                     tmpking=tmp.getKing(false);
+                     p1=live(tmp,tmpking,false);
                      tmpking=tmp.getKing(true);
-                     for(point pnt:tmpking.posmoves){
-                        board tmp1=tmp.clone();
-                        tmp1.makeMove(tmpking.pos, pnt);
-                        if(!tmp1.check(tmp1.getKing(true)))
-                            c1=true;
-                     }
+                     c1=live(tmp,tmpking,true); 
                      if(!c1){
                          if(!tmp.check(tmpking)&&tmp.comp.size()==1&&tmp.comp.get(0).getClass()==King.class){
                              JOptionPane.showMessageDialog(null, "Game is Tie");
@@ -242,6 +229,9 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                              gameOn=false;
                          }
                      }
+                      }
+                     else JOptionPane.showMessageDialog(null, "The King Will Die");
+                     
                  }
                  else{
                      sel = false;
