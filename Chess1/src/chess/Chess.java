@@ -30,8 +30,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
    boolean gameOn=false;
     ImageIcon tmp;
     private JPanel chessBoard;
-    private final JLabel message = new JLabel(
-            "Chess Champ is ready to play!");
+    private final JLabel message = new JLabel();
     private static final String COLS = "ABCDEFGH";
     public static final int QUEEN = 0, KING = 1,
             ROOK = 2, KNIGHT = 3, BISHOP = 4, PAWN = 5;
@@ -274,13 +273,11 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         }
     }
 
-    /**
-     * Initializes the icons of the initial chess board piece places
-     */
+  
     private final void setupNewGame() {
         this.start = initboard();
         gameOn=true;
-        message.setText("Make your move!");
+      
         // set up the black pieces
         for (int ii = 0; ii < STARTING_ROW.length; ii++) {
             chessBoardSquares[ii][0].setIcon(new ImageIcon(
@@ -312,10 +309,10 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
       
     
      public final void initializeGui() {
-        // create the images for the chess pieces
+     
         createImages();
 
-        // set up the main GUI
+       
         gui.setBorder(new EmptyBorder(5, 5, 5, 5));
         JToolBar tools = new JToolBar();
         tools.setFloatable(false);
@@ -361,12 +358,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
 
         chessBoard = new JPanel(new GridLayout(0, 9)) {
 
-            /**
-             * Override the preferred size to return the largest it can, in
-             * a square shape.  Must (must, must) be added to a GridBagLayout
-             * as the only component (it uses the parent as a guide to size)
-             * with no GridBagConstaint (so it is centered).
-             */
+         
             @Override
             public final Dimension getPreferredSize() {
                 Dimension d = super.getPreferredSize();
@@ -393,23 +385,22 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                 new EmptyBorder(8,8,8,8),
                 new LineBorder(Color.BLACK)
                 ));
-        // Set the BG to be ochre
-        Color ochre = new Color(204,119,34);
+       
+       
         //chessBoard.setBackground(Color.white);
         chessBoard.setOpaque(true);
         JPanel boardConstrain = new JPanel(new GridBagLayout());
-        boardConstrain.setBackground(ochre);
+        boardConstrain.setBackground(Color.WHITE);
         boardConstrain.add(chessBoard);
         gui.add(boardConstrain);
 
-        // create the chess board squares
+       
         Insets buttonMargin = new Insets(0, 0, 0, 0);
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
                 JButton b = new JButton();
                 b.setMargin(buttonMargin);
-                // our chess pieces are 64x64 px in size, so we'll
-                // 'fill this in' using a transparent icon..
+              
                 ImageIcon icon = new ImageIcon(
                         new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
                 b.setIcon(icon);
@@ -426,17 +417,15 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
             }
         }
 
-        /*
-         * fill the chess board
-         */
+      
         chessBoard.add(new JLabel(""));
-        // fill the top row
+    
         for (int ii = 0; ii < 8; ii++) {
             chessBoard.add(
                     new JLabel(COLS.substring(ii, ii + 1),
                     SwingConstants.CENTER));
         }
-        // fill the black non-pawn piece row
+      
         for (int ii = 0; ii < 8; ii++) {
             for (int jj = 0; jj < 8; jj++) {
                 switch (jj) {
@@ -467,24 +456,21 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
 
                 JFrame f = new JFrame("ChessChamp");
                 f.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-                //f.setUndecorated(true);
+           
                 f.add(cg.getGui());
-                // Ensures JVM closes after frame(s) closed and
-                // all non-daemon threads are finished
+               
                 f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                // See https://stackoverflow.com/a/7143398/418556 for demo.
+                
                 f.setLocationByPlatform(true);
 
-                // ensures the frame is the minimum size it needs to be
-                // in order display the components within it
+            
                 f.pack();
-                // ensures the minimum size is enforced.
+              
                 f.setMinimumSize(f.getSize());
                 f.setVisible(true);
             }
         };
-        // Swing GUIs should be created and updated on the EDT
-        // http://docs.oracle.com/javase/tutorial/uiswing/concurrency
+      
         SwingUtilities.invokeLater(ra);
     }
           
