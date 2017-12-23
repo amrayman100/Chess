@@ -303,7 +303,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     }
     
     public void emptyBoard(){
-        for(int i = 1; i < 7 ;i++){
+        for(int i = 0; i < 8 ;i++){
             for(int j = 0 ; j < 8 ;j++){
                  chessBoardSquares[i][j].setIcon(null);
         }
