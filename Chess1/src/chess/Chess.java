@@ -176,8 +176,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                  
                  newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
                  
-                 if(start.possible(csel, newp)){
-                        
+                 if(start.possible(csel, newp)){                        
                         move mv=new move(0);
                      sel = false;
                       tmp = null;
@@ -185,8 +184,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                       tmp.makeMove(csel,newp);
                      if(!tmp.check(tmp.getKing(false))){
                      change(csel,newp);
-                     start.makeMove(csel, newp);
-                     
+                     start.makeMove(csel, newp);                     
                      mv.alpha(start,diff);
                       }
                  }

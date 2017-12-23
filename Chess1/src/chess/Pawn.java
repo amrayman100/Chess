@@ -43,12 +43,20 @@ public class Pawn extends piece {
         else if(pos.r==1&&!comp&&game.pcontain(new point(pos.r+1,pos.c))&&position.r==pos.r+2&&position.c==pos.c){
             notjump = false;
         }
+          
+          if(!comp&&game.ccontain(position)&&pos.r-1==position.r){
+              wrongkill = false;
+          }
+          
+          else if(comp&&game.pcontain(position)&&pos.r+1==position.r){
+               wrongkill = false;
+          }
     
     
 
         
         
-        return super.canMove(position)&&!game.pcontain(position)&&!game.ccontain(position)&&notjump; //To change body of generated methods, choose Tools | Templates.
+        return super.canMove(position)&&!game.pcontain(position)&&!game.ccontain(position)&&notjump&&wrongkill; //To change body of generated methods, choose Tools | Templates.
     }
    
      @Override
