@@ -174,12 +174,11 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                  
                  if(start.possible(csel, newp)){
                         change(csel,newp);
-                        
+                        start.makeMove(csel, newp);
                         move mv=new move(0);
                      sel = false;
                       tmp = null;
                      mv.alpha(start,diff);
-                     start.makeMove(csel, newp);
                  }
                  else{
                      sel = false;
