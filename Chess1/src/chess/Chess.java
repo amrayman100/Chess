@@ -149,7 +149,10 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                chessBoardSquares[i][j].addActionListener(new ActionListener() {
     
    public void actionPerformed(ActionEvent e) {
+       System.out.println(gameOn);
        if(!gameOn)return;
+       boolean p1=false;
+       boolean c1=false;
        JButton btn = (JButton) e.getSource();
              piece[][] p =  start.brd;
              if(sel==false){
@@ -184,9 +187,61 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                       tmp.makeMove(csel,newp);
                      if(!tmp.check(tmp.getKing(false))){
                      change(csel,newp);
-                     start.makeMove(csel, newp);                     
+                     start.makeMove(csel, newp);
+                     start.print();
+                     King tmpking=tmp.getKing(false);
+                     for(point pnt:tmpking.posmoves){
+                        board tmp1=tmp.clone();
+                        tmp1.makeMove(tmpking.pos, pnt);
+                        if(!tmp1.check(tmp1.getKing(false)))
+                            p1=true;
+                     }
+                     tmpking=tmp.getKing(true);
+                     for(point pnt:tmpking.posmoves){
+                        board tmp1=tmp.clone();
+                        tmp1.makeMove(tmpking.pos, pnt);
+                        if(!tmp1.check(tmp1.getKing(false)))
+                            c1=true;
+                     }                     
                      mv.alpha(start,diff);
+                     if(start.check(start.getKing(false))) JOptionPane.showMessageDialog(null, "Check!");
                       }
+                     else JOptionPane.showMessageDialog(null, "The King Will Die");
+                     King tmpking=tmp.getKing(false);
+                     for(point pnt:tmpking.posmoves){
+                        board tmp1=tmp.clone();
+                        tmp1.makeMove(tmpking.pos, pnt);
+                        if(!tmp1.check(tmp1.getKing(false)))
+                            p1=true;
+                        
+                     }
+                     tmpking=tmp.getKing(true);
+                     for(point pnt:tmpking.posmoves){
+                        board tmp1=tmp.clone();
+                        tmp1.makeMove(tmpking.pos, pnt);
+                        if(!tmp1.check(tmp1.getKing(true)))
+                            c1=true;
+                     }
+                     if(!c1){
+                         if(!tmp.check(tmpking)&&tmp.comp.size()==1&&tmp.comp.get(0).getClass()==King.class){
+                             JOptionPane.showMessageDialog(null, "Game is Tie");
+                             gameOn=false;
+                         }
+                         else if(tmp.check(tmpking)) {
+                             JOptionPane.showMessageDialog(null, "You win");
+                             gameOn=false;
+                         }
+                     }
+                     else if(!p1){
+                         if(!tmp.check(tmp.getKing(false))&&tmp.player.size()==1&&tmp.player.get(0).getClass()==King.class){
+                             JOptionPane.showMessageDialog(null, "Game is Tie");
+                             gameOn=false;
+                         }
+                         else if(tmp.check(tmp.getKing(false))) {
+                             JOptionPane.showMessageDialog(null, "Bot wins");
+                             gameOn=false;
+                         }
+                     }
                  }
                  else{
                      sel = false;

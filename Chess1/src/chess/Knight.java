@@ -43,7 +43,7 @@ evaluate=new int[][]{{-50,-40,-30,-30,-30,-30,-40,-50},
         point p1=new point(pos.r,pos.c);
         p.pos=p1;
         p.comp=this.comp;
-        p.game=this.game.clone();
+        p.game=this.game;
         ArrayList<point> posmoves1=new ArrayList();
         for(point p2:posmoves)posmoves1.add(p2);
         p.posmoves=posmoves1;

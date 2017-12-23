@@ -24,14 +24,15 @@ public class board {
         int[][] clon=new int[8][8];
         for(int i=0;i<8;i++)for(int j=0;j<8;j++)
             clon[i][j]=this.color[i][j];
-        for(piece p:comp) comp1.add(p);
-        for(piece p:player) player1.add(p);
+        for(piece p:comp) comp1.add(p.clone());
+        for(piece p:player) player1.add(p.clone());
         board clone = new board(player1,comp1);
         piece[][] cln=new piece[8][8];
         char b1[][]=new char[8][8];
         for(int i=0;i<8;i++)
             for(int j=0;j<8;j++){
-                cln[i][j]=brd[i][j];
+                if(brd[i][j]==null)continue;
+                cln[i][j]=brd[i][j].clone();
                 b1[i][j]=b[i][j];
             }
         clone.brd=cln;

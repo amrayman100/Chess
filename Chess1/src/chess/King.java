@@ -79,7 +79,7 @@ public class King extends piece {
         point p1=new point(pos.r,pos.c);
         p.pos=p1;
         p.comp=this.comp;
-        p.game=this.game.clone();
+        p.game=this.game;
         ArrayList<point> posmoves1=new ArrayList();
         posmoves.forEach((p2) -> {
             posmoves1.add(p2);
