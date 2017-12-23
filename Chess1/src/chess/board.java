@@ -7,15 +7,23 @@ public class board {
     ArrayList<piece> comp;
     char b[][]=new char[8][8];
     piece[][] brd=new piece[8][8];
+    public int color[][]=new int[8][8];
     public board(ArrayList<piece> player, ArrayList<piece> comp) {
         this.player = player;
         this.comp = comp;
+        for(int i=0;i<8;i++)for(int j=0;j<8;j++)
+            color[i][j]=0;
     }
     public board() {
+        for(int i=0;i<8;i++)for(int j=0;j<8;j++)
+            color[i][j]=0;
     }
     public board clone(){
         ArrayList<piece> comp1=new ArrayList();
         ArrayList<piece> player1=new ArrayList();
+        int[][] clon=new int[8][8];
+        for(int i=0;i<8;i++)for(int j=0;j<8;j++)
+            clon[i][j]=this.color[i][j];
         for(piece p:comp) comp1.add(p);
         for(piece p:player) player1.add(p);
         board clone = new board(player1,comp1);
@@ -28,6 +36,7 @@ public class board {
             }
         clone.brd=cln;
         clone.b=b1;
+        clone.color=clon;
         return clone;
     }
     public boolean ccontain(point p){
@@ -43,9 +52,10 @@ public class board {
         return false;
     }
     public void print(){
+        this.getBoard();
     for(piece p:player){
         b[p.pos.r][p.pos.c]=p.rep;
-        p.generate(); 
+        p.generate();
     }
     for(piece p:comp){
         b[p.pos.r][p.pos.c]=p.rep;
@@ -60,12 +70,11 @@ public class board {
         System.out.println("");
     }
     }
-    public piece[][] getBoard(){
+    public void getBoard(){
         for(piece p:comp)
             brd[p.pos.r][p.pos.c]=p;
         for(piece p:player)
             brd[p.pos.r][p.pos.c]=p;
-        return brd;
     }
         public boolean possible(point oldp,point newp){
         for(point p:brd[oldp.r][oldp.c].posmoves)
@@ -113,4 +122,31 @@ public class board {
         }
 
     }
+    public King getKing(boolean cmp){
+        if(cmp){
+            for(piece p:comp)
+                if(p.getClass()==King.class)return (King)p;
+        }
+        else {
+            for(piece p:player )      
+                if(p.getClass()==King.class)return (King)p;
+        }
+        return new King();
+    }
+    public boolean check(piece p){
+        if(p.comp){
+            for(piece p1:player)
+                for(point pnt:p1.posmoves)
+                    if(pnt.c==p.pos.c&&p.pos.r==pnt.r)return true;
+        }
+        else{
+            for(piece p1:comp)
+                for(point pnt:p1.posmoves)
+                    if(pnt.c==p.pos.c&&p.pos.r==pnt.r)return true;
+        }
+        return false;
+        }
+//    public int checkmate(piece p){
+//        
+//    }
 }

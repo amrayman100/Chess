@@ -65,7 +65,11 @@ public class King extends piece {
         int arr[]={0,1,-1};
         for(int i=0;i<3;i++)
             for(int j=0;j<3;j++){
-                if(canMove(new point(pos.r+arr[i],pos.c+arr[j])))posmoves.add(new point(pos.r+arr[i],pos.c+arr[j]));
+                if(canMove(new point(pos.r+arr[i],pos.c+arr[j]))){
+                    posmoves.add(new point(pos.r+arr[i],pos.c+arr[j]));
+//                    if(comp)game.color[pos.r+arr[i]][pos.c+arr[j]]=-1;
+//                    else game.color[pos.r+arr[i]][pos.c+arr[j]]=1;
+                }
             }
     }
 

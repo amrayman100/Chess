@@ -35,7 +35,6 @@ public double value;
     move max(board brd,int alpha,int beta,int depth,move old){
         if(depth==0){
             move v=new move(utility(brd));
-            System.out.println(v.value);
             v.oldp=old.oldp;
             v.newp=old.oldp;
             return v;
@@ -59,7 +58,6 @@ public double value;
     move min(board brd,int alpha,int beta,int depth,move old){
         if(depth==0){
             move v=new move(utility(brd));
-                        System.out.println(v.value);
             v.oldp=old.oldp;
             v.newp=old.newp;
             return v;

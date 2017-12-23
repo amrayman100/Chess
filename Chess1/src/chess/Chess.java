@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  */
 
 public class Chess {
-   
+   board start;
 private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     public static JButton[][] chessBoardSquares = new JButton[8][8];
     public static Image[][] chessPieceImages = new Image[2][6];
@@ -27,6 +27,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     public point csel;
    public point newp;
    public int diff = 1;
+   boolean gameOn=false;
     ImageIcon tmp;
     private JPanel chessBoard;
     private final JLabel message = new JLabel(
@@ -37,47 +38,6 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
     public static final int[] STARTING_ROW = {
         ROOK, KNIGHT, BISHOP, KING, QUEEN, BISHOP, KNIGHT, ROOK
     };
-    
-    
-     board start =new board();
-        ArrayList<piece> cmp=new ArrayList<>();
-       
-        piece k=new King(start,true);
-       
-        piece q=new queen(start,true);
-      
-        piece b=new bishop(start,true);
-        
-        piece kn=new Knight(start,true);
-       
-        piece r=new rook(start,true);
-        
-        piece r1=new rook(start,true);
-        
-        piece b1=new bishop(start,true);
-        
-        piece kn1=new Knight(start,true);
-       
-     
-        ArrayList<piece> pl=new ArrayList();
-        piece kp=new King(start,false);
-        
-        piece qp=new queen(start,false);
-       
-        piece bp=new bishop(start,false);
-       
-        piece knp=new Knight(start,false);
-       
-        piece rp=new rook(start,false);
-        
-        piece rp1=new rook(start,false);
-        
-        piece bp1=new bishop(start,false);
-      
-        piece knp1=new Knight(start,false);
-       
-       
-    
        public static void change(point oldp,point newp){
         ImageIcon tmp=(ImageIcon)Chess.chessBoardSquares[oldp.c][oldp.r].getIcon();
         Chess.chessBoardSquares[newp.c][newp.r].setIcon(tmp);
@@ -87,17 +47,47 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         if(b.pcontain(p))return true;
         return false;
     }
-    public static final int BLACK = 0, WHITE = 1;
-    
-      Chess() {
-        // start.getBoard()
- try{
-   UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
- }catch(Exception e){
-  e.printStackTrace(); 
- }
-        initializeGui();
-          k.pos=new point(0,4);
+    public board initboard(){
+        board ret=new board();
+        ArrayList<piece> cmp=new ArrayList<>();
+       
+        piece k=new King(ret,true);
+       
+        piece q=new queen(ret,true);
+      
+        piece b=new bishop(ret,true);
+        
+        piece kn=new Knight(ret,true);
+       
+        piece r=new rook(ret,true);
+        
+        piece r1=new rook(ret,true);
+        
+        piece b1=new bishop(ret,true);
+        
+        piece kn1=new Knight(ret,true);
+        ArrayList<piece> pl=new ArrayList();
+        piece kp=new King(ret,false);
+        
+        piece qp=new queen(ret,false);
+       
+        piece bp=new bishop(ret,false);
+       
+        piece knp=new Knight(ret,false);
+       
+        piece rp=new rook(ret,false);
+        
+        piece rp1=new rook(ret,false);
+        
+        piece bp1=new bishop(ret,false);
+      
+        piece knp1=new Knight(ret,false);
+         for(int i=0;i<8;i++){
+            Pawn p=new Pawn(ret,true);
+            p.pos=new point(1,i);
+            cmp.add(p);
+        }
+         k.pos=new point(0,4);
           q.pos=new point(0,3);
           b.pos=new point(0,2);
           kn.pos=new point(0,1);
@@ -132,12 +122,25 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         pl.add(bp1);
         pl.add(knp1);
         for(int i=0;i<8;i++){
-            Pawn p=new Pawn(start,false);
+            Pawn p=new Pawn(ret,false);
             p.pos=new point(6,i);
             pl.add(p);
         }
-        start.comp=cmp;
-        start.player=pl;
+        ret.comp=cmp;
+        ret.player=pl;
+        return ret;
+    }
+    public static final int BLACK = 0, WHITE = 1;
+    
+      Chess() {
+        // start.getBoard()
+ try{
+   UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+ }catch(Exception e){
+  e.printStackTrace(); 
+ }
+        initializeGui();
+          start = initboard();
         for(int i = 0 ; i < 8 ; i++){
             
             for(int j = 0 ; j < 8 ; j++){
@@ -146,8 +149,9 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                chessBoardSquares[i][j].addActionListener(new ActionListener() {
     
    public void actionPerformed(ActionEvent e) {
+       if(!gameOn)return;
        JButton btn = (JButton) e.getSource();
-             piece[][] p =  start.getBoard();
+             piece[][] p =  start.brd;
              if(sel==false){
                  sel = true;
                  csel = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
@@ -173,13 +177,18 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
                  newp = new point(Integer.parseInt(btn.getClientProperty("row").toString()),Integer.parseInt(btn.getClientProperty("column").toString()));
                  
                  if(start.possible(csel, newp)){
-                        change(csel,newp);
                         
                         move mv=new move(0);
                      sel = false;
                       tmp = null;
-                     mv.alpha(start,diff);
+                      board tmp=start.clone();
+                      tmp.makeMove(csel,newp);
+                     if(!tmp.check(tmp.getKing(false))){
+                     change(csel,newp);
                      start.makeMove(csel, newp);
+                     
+                     mv.alpha(start,diff);
+                      }
                  }
                  else{
                      sel = false;
@@ -196,11 +205,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
 
         
         
-         for(int i=0;i<8;i++){
-            Pawn p=new Pawn(start,true);
-            p.pos=new point(1,i);
-            cmp.add(p);
-        }
+        
     }
       
     
@@ -230,6 +235,8 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
      * Initializes the icons of the initial chess board piece places
      */
     private final void setupNewGame() {
+        this.start = initboard();
+        gameOn=true;
         message.setText("Make your move!");
         // set up the black pieces
         for (int ii = 0; ii < STARTING_ROW.length; ii++) {
@@ -249,6 +256,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
             chessBoardSquares[ii][7].setIcon(new ImageIcon(
                     chessPieceImages[WHITE][STARTING_ROW[ii]]));
         }
+        start.print();
     }
     
     public void emptyBoard(){
@@ -302,11 +310,7 @@ private final JPanel gui = new JPanel(new BorderLayout(3, 3));
         tools.add(newGameEasy);
         tools.add(newGameMedium);
         tools.add(newGameHard);
-        
-        tools.add(new JButton("Save")); // TODO - add functionality!
-        tools.add(new JButton("Restore")); // TODO - add functionality!
         tools.addSeparator();
-        tools.add(new JButton("Resign")); // TODO - add functionality!
         tools.addSeparator();
         tools.add(message);
 
